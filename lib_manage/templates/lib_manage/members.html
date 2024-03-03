@@ -1,0 +1,81 @@
+{% extends "lib_manage/layout.html" %}
+{% load static %}
+
+
+{% block body %}
+{% load static %}
+<div class="blocks top_head">
+    <h1>👨👩 Members</h1>
+</div>
+<br>
+<div class="blocks">
+    <a type="button" class="btn btn-primary" href="{% url 'lib_manage:addMember' %}">Add new member</a>
+</div>
+<br>
+<div class="blocks">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Member ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Contact Number</th>
+                <th scope="col">Book Holding</th>
+                <th scope="col">Fees</th>
+                <th scope="col">Issue/Return</th>
+                <th scope="col">Collect Fees</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            {% for data in member_data %}
+                <tr>
+                    <th scope="col">{{ data.id }}</th>
+                    <th scope="col">{{ data.name }}</th>
+                    <th scope="col">{{ data.number }}</th>
+                    <th scope="col">{{ data.holding.title }}</th>
+                    {% if data.fees >= 500 %}
+                    <th scope="col">{{ data.fees }} <span class="badge text-bg-danger">Outstanding Debt</span></th>
+                    {% else %}
+                    <th scope="col">{{ data.fees }}</th>
+                    {% endif %}
+                    <th scope="col">
+                        {% if data.holding == None %}
+                            {% if data.fees >= 500 %}
+                            <button type="button" class="btn btn-secondary btn-sm" disabled>Issue Book</button>
+                            {% else %}
+                            <a type="button" class="btn btn-success btn-sm" href="{% url 'lib_manage:issue' data.id %}">Issue Book</a>
+                            {% endif %}
+                        {% else %}
+                        <a type="button" class="btn btn-warning btn-sm" href="{% url 'lib_manage:return_book' data.id %}">Return Book</a>
+                        {% endif %}
+                    </th>
+                    <th scope="col">
+                        {% if data.fees > 0 %}
+                        <form method="post" action="{% url 'lib_manage:collect_fee' %}">
+                            {% csrf_token %}
+                            <input type="hidden" value="{{ data.id }}" name="member_id">
+                            {% if data.fees >= 500 %}
+                            <button type="submit" class="btn btn-danger btn-sm">Collect Fee</button>
+                            {% else %}
+                            <button type="submit" class="btn btn-secondary btn-sm">Collect Fee</button>
+                            {% endif %}
+                            
+                        </form>
+                        {% else %}
+                        <button type="button" class="btn btn-secondary btn-sm" disabled>Collect Fee</button>
+                        {% endif %}
+                    </th>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock %}
+
+
+
+
+
+
+

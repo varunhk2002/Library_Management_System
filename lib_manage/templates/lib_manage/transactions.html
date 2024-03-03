@@ -1,0 +1,35 @@
+{% extends "lib_manage/layout.html" %}
+{% load static %}
+
+{% block body %}
+{% load static %}
+
+<div class="blocks top_head">
+    <h1>📈📉 Transactions History</h1>
+</div>
+<br>
+<div class="blocks">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Transaction No.</th>
+                <th scope="col">Member</th>
+                <th scope="col">Book</th>
+                <th scope="col">Type</th>
+                <th scope="col">Time and Date</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            {% for data in transaction_list %}
+                <tr>
+                    <th scope="col">{{ data.id }}</th>
+                    <th scope="col">{{ data.member.id }}, {{ data.member.name }}</th>
+                    <th scope="col">{{ data.book.id }}, {{ data.book.title }}</th>
+                    <th scope="col">{{ data.type }}</th>
+                    <th scope="col">{{ data.datetime }}</th>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

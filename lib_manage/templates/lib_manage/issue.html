@@ -1,0 +1,46 @@
+{% extends "lib_manage/layout.html" %}
+{% load static %}
+
+{% block body %}
+{% load static %}
+
+<div class="blocks top_head">
+    <h1>Issue Book</h1>
+</div>
+<br>
+<div class="blocks">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Book ID</th>
+                <th scope="col">Title</th>
+                <th scope="col">Author</th>
+                <th scope="col">ISBN</th>
+                <th scope="col">Publisher</th>
+                <th scope="col">Issue</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            {% for book in available_books %}
+            <tr>
+                <th scope="col">{{ book.id }}</th>
+                <th scope="col">{{ book.title }}</th>
+                <th scope="col">{{ book.author }}</th>
+                <th scope="col">{{ book.isbn }}</th>
+                <th scope="col">{{ book.publisher }}</th>
+                <th scope="col">
+                    <form method="post" action="{% url 'lib_manage:issue' member_id %}">
+                        {% csrf_token %}
+                        <input type="hidden" value="{{ book.id }}" name="book_id">
+                        <!-- <input type="hidden" value="{{ member_id }}" name="member_id"> -->
+                        <button type="submit" class="btn btn-success btn-sm">Issue Book</button>
+                    </form>
+                </th>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock %}

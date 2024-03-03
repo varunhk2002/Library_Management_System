@@ -1,0 +1,31 @@
+{% extends "lib_manage/layout.html" %}
+{% load static %}
+
+{% block body %}
+{% load static %}
+
+<div class="blocks top_head">
+    <h1>Add New Member</h1>
+</div>
+<div class="blocks">
+    <form id="add" method="post" action="{% url 'lib_manage:addMember' %}">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input type="text" class="form-control" name="name">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Phone Number</label>
+            <input type="number" class="form-control" name="number">
+        </div>
+        <button type="submit" class="btn btn-primary">Add Member</button>
+    </form>
+</div>
+
+
+{% endblock %}
+
+
+
+
+

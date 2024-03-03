@@ -1,0 +1,43 @@
+{% extends "lib_manage/layout.html" %}
+{% load static %}
+
+{% block body %}
+{% load static %}
+
+<div class="blocks top_head">
+    <h1>Search Result</h1>
+</div>
+<br>
+<div class="blocks">
+    <a href="{% url 'lib_manage:booksview' %}">Back to all books</a>
+</div>
+<div class="blocks">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Book ID</th>
+                <th scope="col">Title</th>
+                <th scope="col">Author</th>
+                <th scope="col">ISBN</th>
+                <th scope="col">Publisher</th>
+                <th scope="col">Status</th>
+                <th scope="col">Rented By</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            {% for data in books_data %}
+            <tr>
+                <th scope="col">{{ data.id }}</th>
+                <th scope="col">📖 {{ data.title }}</th>
+                <th scope="col">🖋️ {{ data.author }}</th>
+                <th scope="col">{{ data.isbn }}</th>
+                <th scope="col">{{ data.publisher }}</th>
+                <th scope="col">{{ data.status }}</th>
+                <th scope="col">{{ data.holder }}</th>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

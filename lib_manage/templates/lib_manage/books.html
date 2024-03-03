@@ -1,0 +1,63 @@
+{% extends "lib_manage/layout.html" %}
+{% load static %}
+
+
+
+{% block body %}
+{% load static %}
+
+<div class="blocks top_head">
+    <h1>📚 Books</h1>
+</div>
+<br>
+<div class="blocks mb-3">
+    <form method="post" action="{% url 'lib_manage:search' %}">
+        {% csrf_token %}
+        <input type="text" placeholder="Search book by author" class="form-control" name="author">
+        <br>
+        <input type="text" placeholder="Search book by Title" class="form-control" name="title">
+        <br>
+        <button type="submit" class="btn btn-primary btn-sm">Search</button>
+    </form>
+</div>
+<div class="blocks">
+    <a type="button" class="btn btn-primary" href="{% url 'lib_manage:newBook' %}">Add New Book</a>
+</div>
+<br>
+<div class="blocks">
+    <h3>All Books:</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Book ID</th>
+                <th scope="col">Title</th>
+                <th scope="col">Author</th>
+                <th scope="col">ISBN</th>
+                <th scope="col">Publisher</th>
+                <th scope="col">Status</th>
+                <th scope="col">Rented By</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            {% for data in books_data %}
+            <tr>
+                <th scope="col">{{ data.id }}</th>
+                <th scope="col">📖 {{ data.title }}</th>
+                <th scope="col">🖋️ {{ data.author }}</th>
+                <th scope="col">{{ data.isbn }}</th>
+                <th scope="col">{{ data.publisher }}</th>
+                <th scope="col">{{ data.status }}</th>
+                <th scope="col">{{ data.holder }}</th>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock %}
+
+
+
+
+

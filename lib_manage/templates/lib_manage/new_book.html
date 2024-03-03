@@ -1,0 +1,42 @@
+{% extends "lib_manage/layout.html" %}
+{% load static %}
+
+{% block body %}
+{% load static %}
+
+<div class="blocks top_head">
+    <h1>Add New Book</h1>
+</div>
+<br>
+<div class="blocks">
+    <form method="post" action="{% url 'lib_manage:newBook' %}">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label class="form-label">Search by Title</label>
+            <input type="text" class="form-control" name="title">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Search by ISBN</label>
+            <input type="text" class="form-control" name="isbn">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Number of Books</label>
+            <input type="number" name="quantity" max="30">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    {% if messages %}
+    {% for message in messages %}
+    {% if message.tags %}
+    <br>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <b>{{ message.message }}</b>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+</div>
+
+
+{% endblock %}

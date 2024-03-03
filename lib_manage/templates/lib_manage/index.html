@@ -1,0 +1,31 @@
+{% extends "lib_manage/layout.html" %}
+{% load static %}
+
+{% block body %}
+{% load static %}
+<div class="blocks top_head">
+    <h1>🏛️ Library Management System: Home</h1>
+</div>
+<div class="blocks top_head">
+    <img src="{% static 'lib_manage/overflowing-bookcases.jpg' %}" width="400" height="200">
+</div>
+<div class="blocks top_head">
+    <a type="button" class="btn btn-primary btn-lg home-bt" href="{% url 'lib_manage:membersview' %}">👨👩 Members</a>
+</div>
+<div class="blocks top_head">
+    <a type="button" class="btn btn-warning btn-lg home-bt" href="{% url 'lib_manage:booksview' %}">📚 Books</a>
+</div>
+<div class="blocks top_head">
+    <a type="button" class="btn btn-success btn-lg home-bt" href="{% url 'lib_manage:transacView' %}">📈📉 Transactions History</a>
+</div>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
