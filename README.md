@@ -30,7 +30,7 @@ The librarian can register a new member from this page
 This page consists of two things: a book searching tool based on title/author, as well as the list of all the books in the system and their status.
 
 
-## Add New Book\
+## Add New Book
 
 <img width="944" alt="image" src="https://github.com/varunhk2002/Library_Management_System/assets/63897501/7841a7b7-9bbf-458a-9c21-ac48991ab2cc">
 
